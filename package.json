@@ -2,6 +2,14 @@
   "name": "@fabiendeborde/re4ct-cli",
   "version": "1.0.1",
   "description": "A simple CLI tool to use when working on React projects.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FabienDeborde/react-cli.git"
+  },
+  "homepage": "https://github.com/FabienDeborde/react-cli#readme",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "keywords": [
     "cli",
     "react",
