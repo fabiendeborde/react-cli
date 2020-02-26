@@ -1,6 +1,6 @@
 {
-  "name": "react-cli",
-  "version": "1.0.0",
+  "name": "@fabiendeborde/re4ct-cli",
+  "version": "1.0.1",
   "description": "A simple CLI tool to use when working on React projects.",
   "keywords": [
     "cli",
