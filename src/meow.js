@@ -12,11 +12,12 @@ const help = meow(`
 
   ${chalk.yellow('Commands:')}
         ${chalk.white('memo              create a new memo component')}
+        ${chalk.white('cp                create a new functional component')}
         ${chalk.white('pcp               create a new pure component')}
         ${chalk.white('page              create a new page')}
-        ${chalk.gray('action-reducer    add a new set of action & reducer')}
-        ${chalk.gray('redux             add redux to the project')}
-        ${chalk.gray('boilerplate       add a new full project boilerplate code')}
+        ${chalk.gray('action-reducer     add a new set of action & reducer')}
+        ${chalk.gray('redux              add redux to the project')}
+        ${chalk.gray('boilerplate        add a new full project boilerplate code')}
   `, {
   boolean: constants.COMMAND_LIST,
   flags: {

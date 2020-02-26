@@ -1,4 +1,4 @@
-const jsx = require('../templates/component')
+const jsx = require('../templates/pureComponent')
 const packageJson = require('../templates/packageJson')
 const style = require('../templates/style')
 const createFile = require('../utils/createFiles')

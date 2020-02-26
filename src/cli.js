@@ -7,6 +7,7 @@ const flags = cli.flags
 
 const addMemo = require('./scripts/addMemo')
 const addComponent = require('./scripts/addComponent')
+const addPureComponent = require('./scripts/addPureComponent')
 const addPage = require('./scripts/addPage')
 const addActionReducer = require('./scripts/addActionReducer')
 const addRedux = require('./scripts/addRedux')
@@ -28,8 +29,11 @@ if (input && COMMAND_LIST.includes(input)) {
     case 'memo':
       nameRequired(addMemo)
       break
-    case 'pcp':
+    case 'cp':
       nameRequired(addComponent)
+      break
+    case 'pcp':
+      nameRequired(addPureComponent)
       break
     case 'page':
       nameRequired(addPage)
