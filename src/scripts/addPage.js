@@ -9,7 +9,8 @@ const DIRECTORIES = require('../constants').DIRECTORIES
 module.exports = (options) => {
   // console.log('Add Page', options)
   const name = `${capitalize(options.name)}Page`
-  const dir = `${DIRECTORIES.page}${name}`
+  let dir = `${DIRECTORIES.page}${name}`
+  if (options.folder) dir = `${DIRECTORIES.page}${options.folder}/${name}`
   const cypressDir = `${DIRECTORIES.cypress}${name}`
 
   createFile('package.json', packageJson(name), dir)

@@ -8,6 +8,7 @@ const help = meow(`
 
   ${chalk.red('Options:')}
       ${chalk('--name, -n  Specify the name of the memo|component|page|action&reducer (required except for boilerplate & redux commands)')}
+      ${chalk('--folder, -f  Specify a folder to save the memo|component|page (optional, works only with memo, cp, pcp & page)')}
       ${chalk('--redux, -x  Add redux support for a memo|component|page')}
 
   ${chalk.yellow('Commands:')}
@@ -24,6 +25,11 @@ const help = meow(`
     name: {
       type: 'string',
       alias: 'n',
+      default: ''
+    },
+    folder: {
+      type: 'string',
+      alias: 'f',
       default: ''
     },
     redux: {

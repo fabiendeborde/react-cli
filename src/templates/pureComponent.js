@@ -2,7 +2,7 @@ module.exports = (name) => {
   return `
 import React, { PureComponent } from 'react'
 // import PropTypes from 'prop-types'
-// import {} from '${name}.style.js'
+// import {} from './${name}.style.js'
 
 class ${name} extends PureComponent {
 
