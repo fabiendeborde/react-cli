@@ -8,7 +8,8 @@ const DIRECTORIES = require('../constants').DIRECTORIES
 module.exports = (options) => {
   // console.log('Add Memo', options)
   const name = capitalize(options.name)
-  const dir = `${DIRECTORIES.component}${name}`
+  let dir = `${DIRECTORIES.component}${name}`
+  if (options.folder) dir = `${DIRECTORIES.component}${options.folder}/${name}`
 
   createFile('package.json', packageJson(name), dir)
   createFile(`${name}.jsx`, jsx(name), dir)

@@ -1,3 +1,5 @@
 module.exports = (name) => {
-  return ''
+  return `
+import styled from 'styled-components'
+`
 }
