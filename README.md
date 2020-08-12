@@ -1,6 +1,9 @@
 # React CLI tool
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/FabienDeborde/react-cli/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/)
+[![GitHub release](https://img.shields.io/github/v/release/FabienDeborde/react-cli)](https://github.com/FabienDeborde/react-cli/releases/)
+[![GitHub Workflow](https://img.shields.io/github/workflow/status/FabienDeborde/react-cli/Publish%20to%20NPM%20&%20GitHub%20Packages)](https://github.com/FabienDeborde/react-cli/actions?query=workflow%3A%22Publish+to+NPM+%26+GitHub+Packages%22)
+![Dependencies](https://img.shields.io/david/FabienDeborde/react-cli)
+![Size](https://img.shields.io/github/languages/code-size/FabienDeborde/react-cli)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/FabienDeborde/react-cli/blob/master/LICENSE.md)
 
 
 `npm i -g @fabiendeborde/re4ct-cli`\
