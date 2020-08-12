@@ -1,5 +1,6 @@
 exports.COMMAND_LIST = [
   'memo',
+  'fn',
   'cp',
   'pcp',
   'page',

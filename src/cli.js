@@ -29,6 +29,9 @@ if (input && COMMAND_LIST.includes(input)) {
     case 'memo':
       nameRequired(addMemo)
       break
+    case 'fn':
+      nameRequired(addFunctionalComponent)
+      break
     case 'cp':
       nameRequired(addComponent)
       break
