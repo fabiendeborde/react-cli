@@ -1,6 +1,6 @@
 {
   "name": "@fabiendeborde/re4ct-cli",
-  "version": "1.12.3",
+  "version": "1.12.6",
   "description": "A simple CLI tool to use when working on React projects.",
   "repository": {
     "type": "git",
