@@ -1,8 +1,9 @@
-module.exports = (name) => {
+const style = require('../utils/importStyle')
+module.exports = (name, options) => {
   return `
 import React, { memo } from 'react'
 // import PropTypes from 'prop-types'
-// import {} from './${name}.style.js'
+${style(name, options.style)}
 
 const ${name} = (props) => {
   return (

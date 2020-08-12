@@ -1,10 +1,13 @@
-const jsx = require('../templates/page')
-const packageJson = require('../templates/packageJson')
-const cypressSample = require('../templates/cypressSample')
-const style = require('../templates/style')
-const createFile = require('../utils/createFiles')
 const capitalize = require('../utils/capitalize')
 const DIRECTORIES = require('../constants').DIRECTORIES
+
+const {
+  createPackage,
+  createJSX,
+  createStyle,
+  createTest,
+  createCypress
+} = require('../utils/createFiles')
 
 module.exports = (options) => {
   // console.log('Add Page', options)
@@ -13,9 +16,9 @@ module.exports = (options) => {
   if (options.folder) dir = `${DIRECTORIES.page}${options.folder}/${name}`
   const cypressDir = `${DIRECTORIES.cypress}${name}`
 
-  createFile('package.json', packageJson(name), dir)
-  createFile(`${name}.jsx`, jsx(name), dir)
-  createFile(`${name}.style.js`, style(name), dir)
-  createFile(`${name}.test.js`, '', dir)
-  createFile(`${name}.spec.js`, cypressSample(name), cypressDir)
+  createPackage(name, dir)
+  createJSX(name, dir, options)
+  createStyle(name, dir, options.style)
+  createTest(name, dir)
+  createCypress(name, cypressDir)
 }

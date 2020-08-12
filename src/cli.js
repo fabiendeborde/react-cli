@@ -4,13 +4,14 @@ const cli = require('./meow')
 const COMMAND_LIST = require('./constants').COMMAND_LIST
 const input = cli.input[0]
 const flags = cli.flags
+flags.input = input
 
 const addMemo = require('./scripts/addMemo')
+const addFunctionalComponent = require('./scripts/addFunctionalComponent')
 const addComponent = require('./scripts/addComponent')
 const addPureComponent = require('./scripts/addPureComponent')
 const addPage = require('./scripts/addPage')
 const addActionReducer = require('./scripts/addActionReducer')
-const addRedux = require('./scripts/addRedux')
 const addBoilerplate = require('./scripts/addBoilerplate')
 
 const nameRequired = (fn) => {
@@ -19,7 +20,7 @@ const nameRequired = (fn) => {
   } else {
     console.warn(chalk.red(`
       Please specify a --name option.
-      The name option is required for memos | pure components | pages.
+      The name option is required for components | pages | action & reducer.
     `))
   }
 }
@@ -28,6 +29,9 @@ if (input && COMMAND_LIST.includes(input)) {
   switch (input) {
     case 'memo':
       nameRequired(addMemo)
+      break
+    case 'fn':
+      nameRequired(addFunctionalComponent)
       break
     case 'cp':
       nameRequired(addComponent)
@@ -38,11 +42,8 @@ if (input && COMMAND_LIST.includes(input)) {
     case 'page':
       nameRequired(addPage)
       break
-    case 'action-reducer':
-      addActionReducer(flags)
-      break
-    case 'redux':
-      addRedux(flags)
+    case 'rdx':
+      nameRequired(addActionReducer)
       break
     case 'boilerplate':
       addBoilerplate(flags)
