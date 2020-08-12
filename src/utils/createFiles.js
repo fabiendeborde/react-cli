@@ -9,8 +9,6 @@ const style = require('../templates/style')
 const stories = require('../templates/stories')
 const cypressSample = require('../templates/cypressSample')
 const action = require('../templates/action')
-const reducer = require('../templates/reducer')
-const reducerIndexTemplate = require('../templates/reducerIndex')
 
 const createFile = (fileName, content, path) => {
   const fullPath = `${currentDir}${path}`
@@ -38,6 +36,39 @@ const createFile = (fileName, content, path) => {
     }
   } catch (error) {
     console.warn(chalk.red(`Oops! An error occured while trying to create ${fileName}...`))
+  }
+}
+const updateActionIndex = (name, dir) => {
+  const fullPath = `${currentDir}${DIRECTORIES.actions}`
+  const indexContent = `export * from './${dir.replace('/src/actions/', '')}.actions'\n`
+  try {
+    // check if at the root of the project
+    if (fs.existsSync(`${currentDir}/package.json`)) {
+      // Check if directory exists (create it if it doesn't)
+      if (!fs.existsSync(fullPath)) {
+        fs.mkdirSync(fullPath, { recursive: true }, (err) => {
+          if (err) throw err
+        })
+      }
+      const filePath = `${fullPath}/index.js`
+      // Check if the target file already exists (create if it doesn't)
+      if (!fs.existsSync(filePath)) {
+        fs.writeFile(filePath, indexContent, function (err) {
+          if (err) throw err
+          console.log(chalk.green(`Action index created (with ${name}.actions support)`))
+        })
+      } else {
+        // update file here
+        fs.appendFile(filePath, indexContent, function (err) {
+          if (err) throw err
+          console.log(chalk.green(`Index updated to support ${name}.actions`))
+        })
+      }
+    } else {
+      console.warn(chalk.yellow('No package.json found in this directory. Are you sure your project has been initialized?'))
+    }
+  } catch (error) {
+    console.warn(chalk.red(`Oops! An error occured while trying to create ${name} action...`))
   }
 }
 
@@ -94,6 +125,10 @@ const createTest = (name, dir) => {
 const createCypress = (name, dir) => {
   createFile(`${name}.spec.js`, cypressSample(name), dir)
 }
+const createAction = (name, dir) => {
+  createFile(`${name}.actions.js`, action(name), dir)
+  updateActionIndex(name, dir)
+}
 
 module.exports = {
   createPackage,
@@ -101,5 +136,6 @@ module.exports = {
   createStyle,
   createStory,
   createTest,
-  createCypress
+  createCypress,
+  createAction
 }
