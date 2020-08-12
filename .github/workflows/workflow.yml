@@ -14,19 +14,6 @@ jobs:
         with:
           node-version: 12
       - run: yarn test
-      - name: Bump Version
-        shell: bash
-        run: |
-          echo current tag: ${GITHUB_REF##*/}
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          npm --no-git-tag-version version ${GITHUB_REF##*/}
-          git commit -m "Bump version" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
 
   publish-npm:
     needs: build
