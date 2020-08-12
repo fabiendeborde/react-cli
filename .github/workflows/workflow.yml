@@ -19,18 +19,19 @@ jobs:
         run: |
           echo current tag: ${GITHUB_REF##*/}
           npm version ${GITHUB_REF##*/}
-      - name: Commit file
-        shell: bash
-        run: |
-          git add .
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Bump version" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          cat package.json
+      # - name: Commit file
+      #   shell: bash
+      #   run: |
+      #     git add .
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git commit -m "Bump version" -a
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
 
   publish-npm:
     needs: build
