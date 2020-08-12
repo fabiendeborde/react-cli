@@ -32,10 +32,10 @@ const help = meow(`
       alias: 'f',
       default: ''
     },
-    redux: {
-      type: 'boolean',
-      alias: 'x',
-      default: false
+    style: {
+      type: 'string',
+      alias: 's',
+      default: 'styled'
     }
   }
 })
