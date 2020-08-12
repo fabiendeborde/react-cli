@@ -4,8 +4,10 @@ const cli = require('./meow')
 const COMMAND_LIST = require('./constants').COMMAND_LIST
 const input = cli.input[0]
 const flags = cli.flags
+flags.input = input
 
 const addMemo = require('./scripts/addMemo')
+const addFunctionalComponent = require('./scripts/addFunctionalComponent')
 const addComponent = require('./scripts/addComponent')
 const addPureComponent = require('./scripts/addPureComponent')
 const addPage = require('./scripts/addPage')
