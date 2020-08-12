@@ -4,13 +4,13 @@ const currentDir = process.cwd()
 
 const { DIRECTORIES } = require('../constants')
 
-const packageJson = require('../templates/packageJson')
-const style = require('../templates/style')
-const stories = require('../templates/stories')
-const cypressSample = require('../templates/cypressSample')
-const action = require('../templates/action')
-const reducer = require('../templates/reducer')
-const reducerIndexTemplate = require('../templates/reducerIndex')
+const packageJson = require('../templates/files/packageJson')
+const style = require('../templates/files/style')
+const stories = require('../templates/files/stories')
+const cypressSample = require('../templates/files/cypressSample')
+const action = require('../templates/files/action')
+const reducer = require('../templates/files/reducer')
+const reducerIndexTemplate = require('../templates/files/reducerIndex')
 
 const createFile = (fileName, content, path) => {
   const fullPath = `${currentDir}${path}`
@@ -130,19 +130,19 @@ const createJSX = (name, dir, options) => {
   let jsx
   switch (options.input) {
     case 'memo':
-      jsx = require('../templates/memo')
+      jsx = require('../templates/files/memo')
       break
     case 'fn':
-      jsx = require('../templates/functionalComponent')
+      jsx = require('../templates/files/functionalComponent')
       break
     case 'cp':
-      jsx = require('../templates/component')
+      jsx = require('../templates/files/component')
       break
     case 'pcp':
-      jsx = require('../templates/pureComponent')
+      jsx = require('../templates/files/pureComponent')
       break
     case 'page':
-      jsx = require('../templates/page')
+      jsx = require('../templates/files/page')
       break
     default:
       break
