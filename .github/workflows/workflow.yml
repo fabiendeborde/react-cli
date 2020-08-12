@@ -20,7 +20,7 @@ jobs:
           echo current tag: ${GITHUB_REF##*/}
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          npm version ${GITHUB_REF##*/}
+          npm --no-git-tag-version version ${GITHUB_REF##*/}
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
