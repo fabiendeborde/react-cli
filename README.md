@@ -1,4 +1,7 @@
 # React CLI tool
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/FabienDeborde/react-cli/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/)
+
 
 `npm i -g @fabiendeborde/re4ct-cli`\
 `yarn add global @fabiendeborde/re4ct-cli`
@@ -11,3 +14,8 @@ It is based on the architecture I use in my projects:
 ## Usage
 Run help command to see available commands.
 > re4ct --help
+
+
+## TODOS:
+- [] add testing
+- [] add boilerplate command support
