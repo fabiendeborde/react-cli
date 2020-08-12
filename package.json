@@ -1,6 +1,6 @@
 {
   "name": "@fabiendeborde/re4ct-cli",
-  "version": "1.11.0",
+  "version": "1.12.1",
   "description": "A simple CLI tool to use when working on React projects.",
   "repository": {
     "type": "git",
@@ -13,10 +13,13 @@
   "keywords": [
     "cli",
     "react",
-    "add components"
+    "boilerplate"
   ],
   "main": "index.js",
   "license": "MIT",
+  "bin": {
+    "re4ct": "./src/cli.js"
+  },
   "devDependencies": {
     "eslint": "^7.6.0",
     "eslint-config-standard": "^14.1.1",
@@ -24,9 +27,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1"
-  },
-  "bin": {
-    "re4ct": "./src/cli.js"
   },
   "dependencies": {
     "chalk": "^4.1.0",
