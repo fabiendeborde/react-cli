@@ -2,10 +2,15 @@ const fs = require('fs')
 const chalk = require('chalk')
 const currentDir = process.cwd()
 
+const { DIRECTORIES } = require('../constants')
+
 const packageJson = require('../templates/packageJson')
 const style = require('../templates/style')
 const stories = require('../templates/stories')
 const cypressSample = require('../templates/cypressSample')
+const action = require('../templates/action')
+const reducer = require('../templates/reducer')
+const reducerIndexTemplate = require('../templates/reducerIndex')
 
 const createFile = (fileName, content, path) => {
   const fullPath = `${currentDir}${path}`
