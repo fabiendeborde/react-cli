@@ -19,6 +19,7 @@ jobs:
         run: |
           echo current tag: ${GITHUB_REF##*/}
           npm version ${GITHUB_REF##*/}
+          echo update package
           cat package.json
       # - name: Commit file
       #   shell: bash
