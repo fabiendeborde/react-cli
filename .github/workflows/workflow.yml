@@ -18,9 +18,14 @@ jobs:
         shell: bash
         run: |
           echo current tag: ${GITHUB_REF##*/}
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           npm version ${GITHUB_REF##*/}
-          echo update package
-          cat package.json
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
 
   # publish-npm:
