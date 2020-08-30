@@ -5,7 +5,7 @@ exports.COMMAND_LIST = [
   'pcp',
   'page',
   'rdx',
-  'boilerplate'
+  'create'
 ]
 
 exports.DIRECTORIES = {
