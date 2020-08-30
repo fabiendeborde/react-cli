@@ -1,4 +1,4 @@
-const style = require('../utils/importStyle')
+const style = require('../../utils/importStyle')
 module.exports = (name, options) => {
   return `
 import React, { PureComponent } from 'react'
