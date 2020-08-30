@@ -20,7 +20,6 @@ const nameRequired = (fn) => {
   } else {
     console.warn(chalk.red(`
       Please specify a --name option.
-      The name option is required for components | pages | action & reducer.
     `))
   }
 }
@@ -45,8 +44,8 @@ if (input && COMMAND_LIST.includes(input)) {
     case 'rdx':
       nameRequired(addActionReducer)
       break
-    case 'boilerplate':
-      addBoilerplate(flags)
+    case 'create':
+      nameRequired(addBoilerplate)
       break
     default:
       break
