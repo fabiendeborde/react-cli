@@ -3,6 +3,14 @@ const prompts = require('prompts')
 const questions = [
   {
     type: 'toggle',
+    name: 'git',
+    message: 'Do you want to initialize a Git repository?',
+    initial: true,
+    active: 'yes',
+    inactive: 'no'
+  },
+  {
+    type: 'toggle',
     name: 'redux',
     message: 'Do you want to use Redux?',
     initial: true,
@@ -63,14 +71,42 @@ const questions = [
   }
 ]
 
-const addBoilerplate = (config) => {
+const addReact = () => {
+
+}
+const addGit = () => {
+
+}
+const addRedux = () => {
+
+}
+const addSaga = () => {
+
+}
+const addRouter = () => {
+
+}
+const addStyle = () => {
+
+}
+const addStory = () => {
+
+}
+const addI18n = () => {
+
+}
+const addFormValidation = () => {
 
 }
 
+const addBoilerplate = (config) => {
+  console.log('Add Boilerplate', config)
+}
+
 module.exports = async (options) => {
-  console.log('Add Boilerplate', options)
   if (options.default) {
     const responses = {
+      git: true,
       redux: true,
       saga: false,
       router: true,
@@ -80,12 +116,10 @@ module.exports = async (options) => {
       validation: true
     }
     addBoilerplate(responses)
-    console.log(responses)
   } else {
     try {
       const responses = await prompts(questions)
       addBoilerplate(responses)
-      console.log(responses)
     } catch (error) {
       throw new Error('Error parsing CLI responses.')
     }
