@@ -14,11 +14,10 @@ module.exports = (options) => {
   const name = `${capitalize(options.name)}Page`
   let dir = `${DIRECTORIES.page}${name}`
   if (options.folder) dir = `${DIRECTORIES.page}${options.folder}/${name}`
-  const cypressDir = `${DIRECTORIES.cypress}${name}`
 
   createPackage(name, dir)
   createJSX(name, dir, options)
   createStyle(name, dir, options.style)
   createTest(name, dir)
-  createCypress(name, cypressDir)
+  createCypress(name, dir)
 }
