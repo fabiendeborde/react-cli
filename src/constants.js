@@ -1,5 +1,4 @@
 exports.COMMAND_LIST = [
-  'memo',
   'cp',
   'page',
   'rdx'
@@ -8,6 +7,8 @@ exports.COMMAND_LIST = [
 exports.DIRECTORIES = {
   component: '/src/components/',
   page: '/src/pages/',
-  actions: '/src/actions/',
-  reducers: '/src/reducers/'
+  actions: '/src/store/actions/',
+  reducers: '/src/store/reducers/',
+  selectors: '/src/store/selectors/',
+  types: '/src/store/types/'
 }

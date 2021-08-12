@@ -10,7 +10,7 @@ const help = meow(`
       ${chalk('--name, -n  Specify the name of the component|page|action&reducer (required)')}
       ${chalk('--folder, -f  Specify a folder to save the component|page|action&reducer (optional)')}
       ${chalk('--memo, -m Specify if the component|page should be memoized (optional)')}
-      ${chalk('--javascript, -js Specify if the files should be .js and not .ts (optional)')}
+      ${chalk('--javascript, -j Specify if the files should be .js and not .ts (optional)')}
 
   ${chalk.yellow('Commands:')}
         ${chalk.white('cp                create a new functional component')}
@@ -37,7 +37,7 @@ const help = meow(`
     },
     javascript: {
       type: 'boolean',
-      alias: 'js',
+      alias: 'j',
       default: false
     }
   }
