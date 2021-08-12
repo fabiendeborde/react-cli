@@ -1,6 +1,17 @@
 const prompts = require('prompts')
+const execa = require('execa')
+const Listr = require('Listr')
+const { projectInstall } = require('pkg-install')
 
 const questions = [
+  {
+    type: 'toggle',
+    name: 'yarn',
+    message: 'Do you want to Yarn instead of NPM?',
+    initial: true,
+    active: 'Yarn',
+    inactive: 'NPM'
+  },
   {
     type: 'toggle',
     name: 'git',
@@ -68,14 +79,27 @@ const questions = [
     initial: false,
     active: 'yes',
     inactive: 'no'
+  },
+  {
+    type: 'toggle',
+    name: 'analytics',
+    message: 'Do you want to use Google Analytics?',
+    initial: false,
+    active: 'yes',
+    inactive: 'no'
   }
 ]
 
 const addReact = () => {
 
 }
-const addGit = () => {
-
+const addGit = async () => {
+  const result = await execa('git', ['init'], {
+    cwd: options.targetDirectory
+  })
+  if (result.failed) {
+    return Promise.reject(new Error('Failed to initialize git'))
+  }
 }
 const addRedux = () => {
 
@@ -100,28 +124,31 @@ const addFormValidation = () => {
 }
 
 const addBoilerplate = (config) => {
+  console.log('Node version is: ' + process.version)
   console.log('Add Boilerplate', config)
+  // Check if folder exists, if it doesn't create it
 }
 
 module.exports = async (options) => {
-  if (options.default) {
-    const responses = {
-      git: true,
-      redux: true,
-      saga: false,
-      router: true,
-      style: 'sass',
-      storybook: false,
-      i18n: false,
-      validation: true
-    }
-    addBoilerplate(responses)
-  } else {
+  console.log('options', options)
+  let responses = {
+    yarn: true,
+    git: true,
+    redux: true,
+    saga: false,
+    router: true,
+    style: 'sass',
+    storybook: false,
+    i18n: false,
+    validation: true,
+    analytics: false
+  }
+  if (!options.default) {
     try {
-      const responses = await prompts(questions)
-      addBoilerplate(responses)
+      responses = await prompts(questions)
     } catch (error) {
       throw new Error('Error parsing CLI responses.')
     }
   }
+  addBoilerplate({ ...responses, name: options.name })
 }
