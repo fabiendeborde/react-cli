@@ -8,7 +8,7 @@ const {
 } = require('../utils/createFiles')
 
 module.exports = (options) => {
-  console.log('Add Action & Reducer', options)
+  // console.log('Add Action & Reducer', options)
   const { name, folder } = options
   let actionDir = `${DIRECTORIES.actions}`
   let reducerDir = `${DIRECTORIES.reducers}`
