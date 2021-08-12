@@ -1,11 +1,8 @@
 exports.COMMAND_LIST = [
   'memo',
-  'fn',
   'cp',
-  'pcp',
   'page',
-  'rdx',
-  'create'
+  'rdx'
 ]
 
 exports.DIRECTORIES = {
