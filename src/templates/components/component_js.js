@@ -1,10 +1,9 @@
-const style = require('../../utils/importStyle')
-module.exports = (name, options) => {
+module.exports = (name) => {
   return `import React from 'react'
 // import PropTypes from 'prop-types'
-${style(name, options.style)}
+// import {  } from './${name}.style'
 
-const ${name} = (props) => {
+function ${name} (props) {
   return (
     <div>${name}</div>
   )
