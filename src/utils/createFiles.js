@@ -224,7 +224,6 @@ const createAction = async ({ name, dir, javascript }) => {
   const action = require(`../templates/store/action${jsOrTs}`)
   try {
     const result = await createFile(`${name}.actions.${extension}`, action(dir), dir)
-    console.log('result', result)
     if (result) updateActionIndex(name, dir, extension)
   } catch (error) {
     console.warn(chalk.red(`Oops! An error occured while trying to create ${name} action...`))
