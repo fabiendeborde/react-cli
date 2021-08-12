@@ -11,7 +11,6 @@ exports.COMMAND_LIST = [
 exports.DIRECTORIES = {
   component: '/src/components/',
   page: '/src/pages/',
-  // cypress: '/cypress/integration/',
   actions: '/src/actions/',
   reducers: '/src/reducers/'
 }
