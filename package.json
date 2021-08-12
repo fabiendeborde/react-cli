@@ -1,6 +1,6 @@
 {
   "name": "@fabiendeborde/re4ct-cli",
-  "version": "1.12.6",
+  "version": "1.13.0",
   "description": "A simple CLI tool to use when working on React projects.",
   "repository": {
     "type": "git",
@@ -33,7 +33,12 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
+    "execa": "^4.0.3",
+    "listr": "^0.14.3",
     "meow": "^7.1.0",
+    "ncp": "^2.0.0",
+    "pkg-install": "^1.0.0",
+    "prompts": "^2.3.2",
     "shelljs": "^0.8.4"
   },
   "files": [
