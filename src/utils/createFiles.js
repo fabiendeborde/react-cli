@@ -4,13 +4,10 @@ const currentDir = process.cwd()
 
 const { DIRECTORIES } = require('../constants')
 
-const packageJson = require('../templates/packageJson')
-const style = require('../templates/style')
-const stories = require('../templates/stories')
-const cypressSample = require('../templates/cypressSample')
-const action = require('../templates/action')
-const reducer = require('../templates/reducer')
-const reducerIndexTemplate = require('../templates/reducerIndex')
+const packageJson = require('../templates/components/packageJson')
+const reducer = require('../templates/store/reducer')
+const type = require('../templates/store/type')
+const reducerIndexTemplate = require('../templates/store/reducerIndex')
 
 const createFile = (fileName, content, path) => {
   const fullPath = `${currentDir}${path}`
@@ -40,9 +37,9 @@ const createFile = (fileName, content, path) => {
     console.warn(chalk.red(`Oops! An error occured while trying to create ${fileName}...`))
   }
 }
-const updateActionIndex = (name, dir) => {
+const updateActionIndex = (name, dir, extension) => {
   const fullPath = `${currentDir}${DIRECTORIES.actions}`
-  const indexContent = `export * from './${dir.replace('/src/actions/', '')}.actions'\n`
+  const indexContent = `export * from './${dir.replace(DIRECTORIES.actions, '')}${name}.actions'\n`
   try {
     // check if at the root of the project
     if (fs.existsSync(`${currentDir}/package.json`)) {
@@ -52,7 +49,7 @@ const updateActionIndex = (name, dir) => {
           if (err) throw err
         })
       }
-      const filePath = `${fullPath}/index.js`
+      const filePath = `${fullPath}/index.${extension}`
       // Check if the target file already exists (create if it doesn't)
       if (!fs.existsSync(filePath)) {
         fs.writeFile(filePath, indexContent, function (err) {
@@ -73,7 +70,7 @@ const updateActionIndex = (name, dir) => {
     console.warn(chalk.red(`Oops! An error occured while trying to create ${name} action...`))
   }
 }
-const updateReducerIndex = (name, dir) => {
+const updateReducerIndex = (name, dir, extension) => {
   const fullPath = `${currentDir}${DIRECTORIES.reducers}`
   // const indexContent = `export * from './${dir.replace('/src/reducers/', '')}.reducers'\n`
   try {
@@ -85,7 +82,7 @@ const updateReducerIndex = (name, dir) => {
           if (err) throw err
         })
       }
-      const filePath = `${fullPath}/index.js`
+      const filePath = `${fullPath}/index.${extension}`
       // Check if the target file already exists (create if it doesn't)
       if (!fs.existsSync(filePath)) {
         fs.writeFile(filePath, reducerIndexTemplate(name, dir), function (err) {
@@ -99,7 +96,7 @@ const updateReducerIndex = (name, dir) => {
             return console.error(err)
           }
           const importIndex = data.indexOf('\nconst rootReducer')
-          const importPath = dir === '/src/reducers/' ? `./${name}.reducers` : `./${dir.replace('/src/reducers/', '')}.reducers`
+          const importPath = dir === DIRECTORIES.reducers ? `./${name}.reducers` : `./${dir.replace(DIRECTORIES.reducers, '')}${name}.reducers`
           const importText = `import ${name} from '${importPath}'\n`
           const updatedText = `${data.slice(0, importIndex)}${importText}${data.slice(importIndex)}`
 
@@ -122,77 +119,129 @@ const updateReducerIndex = (name, dir) => {
     console.warn(chalk.red(`Oops! An error occured while trying to create ${name} reducer...`))
   }
 }
-
-const createPackage = (name, dir) => {
-  createFile('package.json', packageJson(name), dir)
-}
-const createJSX = (name, dir, options) => {
-  let jsx
-  switch (options.input) {
-    case 'memo':
-      jsx = require('../templates/memo')
-      break
-    case 'fn':
-      jsx = require('../templates/functionalComponent')
-      break
-    case 'cp':
-      jsx = require('../templates/component')
-      break
-    case 'pcp':
-      jsx = require('../templates/pureComponent')
-      break
-    case 'page':
-      jsx = require('../templates/page')
-      break
-    default:
-      break
+const updateSelectorIndex = (name, dir, extension) => {
+  const fullPath = `${currentDir}${DIRECTORIES.selectors}`
+  const indexContent = `export * from './${dir.replace(DIRECTORIES.selectors, '')}${name}.selectors'\n`
+  try {
+    // check if at the root of the project
+    if (fs.existsSync(`${currentDir}/package.json`)) {
+      // Check if directory exists (create it if it doesn't)
+      if (!fs.existsSync(fullPath)) {
+        fs.mkdirSync(fullPath, { recursive: true }, (err) => {
+          if (err) throw err
+        })
+      }
+      const filePath = `${fullPath}/index.${extension}`
+      // Check if the target file already exists (create if it doesn't)
+      if (!fs.existsSync(filePath)) {
+        fs.writeFile(filePath, indexContent, function (err) {
+          if (err) throw err
+          console.log(chalk.green(`Selectors index created (with ${name}.selectors support)`))
+        })
+      } else {
+        // update file here
+        fs.appendFile(filePath, indexContent, function (err) {
+          if (err) throw err
+          console.log(chalk.green(`Index updated to support ${name}.selectors`))
+        })
+      }
+    } else {
+      console.warn(chalk.yellow('No package.json found in this directory. Are you sure your project has been initialized?'))
+    }
+  } catch (error) {
+    console.warn(chalk.red(`Oops! An error occured while trying to create ${name} selectors...`))
   }
-  if (jsx) createFile(`${name}.jsx`, jsx(name, options), dir)
+}
+const updateTypeIndex = (name, dir, extension) => {
+  const fullPath = `${currentDir}${DIRECTORIES.types}`
+  const indexContent = `export * from './${dir.replace(DIRECTORIES.types, '')}${name}.types'\n`
+  try {
+    // check if at the root of the project
+    if (fs.existsSync(`${currentDir}/package.json`)) {
+      // Check if directory exists (create it if it doesn't)
+      if (!fs.existsSync(fullPath)) {
+        fs.mkdirSync(fullPath, { recursive: true }, (err) => {
+          if (err) throw err
+        })
+      }
+      const filePath = `${fullPath}/index.${extension}`
+      // Check if the target file already exists (create if it doesn't)
+      if (!fs.existsSync(filePath)) {
+        fs.writeFile(filePath, indexContent, function (err) {
+          if (err) throw err
+          console.log(chalk.green(`Types index created (with ${name}.types support)`))
+        })
+      } else {
+        // update file here
+        fs.appendFile(filePath, indexContent, function (err) {
+          if (err) throw err
+          console.log(chalk.green(`Index updated to support ${name}.types`))
+        })
+      }
+    } else {
+      console.warn(chalk.yellow('No package.json found in this directory. Are you sure your project has been initialized?'))
+    }
+  } catch (error) {
+    console.warn(chalk.red(`Oops! An error occured while trying to create ${name} types...`))
+  }
+}
+
+const createPackage = ({ name, dir, javascript }) => {
+  const extension = javascript ? 'jsx' : 'tsx'
+  createFile('package.json', packageJson(name, extension), dir)
+}
+const createComponent = ({ name, dir, memo, javascript }) => {
+  const extension = javascript ? 'jsx' : 'tsx'
+  const jsOrTs = javascript ? '_js' : '_ts'
+  const isMemo = memo ? 'memo_' : ''
+  const component = require(`../templates/components/${isMemo}component${jsOrTs}`)
+
+  if (component) createFile(`${name}.${extension}`, component(name), dir)
   // console.log('options', options)
   // console.log('jsx', jsx)
 }
-const createStyle = (name, dir, styleOption) => {
-  switch (styleOption) {
-    case 'css':
-      createFile(`${name}.css`, '', dir)
-      break
-    case 'scss':
-      createFile(`${name}.scss`, '', dir)
-      break
-    case 'sass':
-      createFile(`${name}.sass`, '', dir)
-      break
-    default:
-      createFile(`${name}.style.js`, style(name), dir)
-      break
-  }
+const createStyle = ({ name, dir, javascript }) => {
+  const extension = javascript ? 'js' : 'ts'
+  const style = require('../templates/components/style')
+  createFile(`${name}.style.${extension}`, style, dir)
 }
-const createStory = (name, dir) => {
-  createFile(`${name}.stories.js`, stories(name), dir)
-}
-const createTest = (name, dir) => {
-  createFile(`${name}.test.js`, '', dir)
-}
-const createCypress = (name, dir) => {
-  createFile(`${name}.spec.js`, cypressSample(name), dir)
-}
-const createAction = (name, dir) => {
-  createFile(`${name}.actions.js`, action(name, dir), dir)
-  updateActionIndex(name, dir)
+const createTest = ({ name, dir, javascript }) => {
+  const extension = javascript ? 'js' : 'ts'
+  createFile(`${name}.spec.${extension}`, '', dir)
 }
 
-const createReducer = (name, dir) => {
-  createFile(`${name}.reducers.js`, reducer(name, dir), dir)
-  updateReducerIndex(name, dir)
+const createAction = ({ name, dir, javascript }) => {
+  const extension = javascript ? 'js' : 'ts'
+  const jsOrTs = javascript ? '_js' : '_ts'
+  const action = require(`../templates/store/action${jsOrTs}`)
+  createFile(`${name}.actions.${extension}`, action(dir), dir)
+  updateActionIndex(name, dir, extension)
+}
+const createReducer = ({ name, dir, javascript }) => {
+  const extension = javascript ? 'js' : 'ts'
+  createFile(`${name}.reducers.${extension}`, reducer(dir), dir)
+  updateReducerIndex(name, dir, extension)
+}
+const createSelector = ({ name, dir, javascript }) => {
+  const extension = javascript ? 'js' : 'ts'
+  const jsOrTs = javascript ? '_js' : '_ts'
+  const selector = require(`../templates/store/selector${jsOrTs}`)
+  createFile(`${name}.selectors.${extension}`, selector(), dir)
+  updateSelectorIndex(name, dir, extension)
+}
+const createTypes = ({ name, dir, javascript }) => {
+  const extension = javascript ? 'js' : 'ts'
+  createFile(`${name}.types.${extension}`, type(), dir)
+  updateTypeIndex(name, dir, extension)
 }
 
 module.exports = {
   createPackage,
-  createJSX,
+  createComponent,
   createStyle,
-  createStory,
   createTest,
-  createCypress,
   createAction,
-  createReducer
+  createReducer,
+  createSelector,
+  createTypes
 }

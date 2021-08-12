@@ -2,51 +2,34 @@
 const chalk = require('chalk')
 const cli = require('./meow')
 const COMMAND_LIST = require('./constants').COMMAND_LIST
+const DIRECTORIES = require('./constants').DIRECTORIES
 const input = cli.input[0]
 const flags = cli.flags
 flags.input = input
 
-const addMemo = require('./scripts/addMemo')
-const addFunctionalComponent = require('./scripts/addFunctionalComponent')
 const addComponent = require('./scripts/addComponent')
-const addPureComponent = require('./scripts/addPureComponent')
-const addPage = require('./scripts/addPage')
 const addActionReducer = require('./scripts/addActionReducer')
-const addBoilerplate = require('./scripts/addBoilerplate')
 
-const nameRequired = (fn) => {
+const nameRequired = (fn, ...args) => {
   if (flags && flags.name) {
-    if (fn) fn(flags)
+    if (fn) fn(flags, args)
   } else {
     console.warn(chalk.red(`
       Please specify a --name option.
-      The name option is required for components | pages | action & reducer.
     `))
   }
 }
 
 if (input && COMMAND_LIST.includes(input)) {
   switch (input) {
-    case 'memo':
-      nameRequired(addMemo)
-      break
-    case 'fn':
-      nameRequired(addFunctionalComponent)
-      break
     case 'cp':
-      nameRequired(addComponent)
-      break
-    case 'pcp':
-      nameRequired(addPureComponent)
+      nameRequired(addComponent, DIRECTORIES.component)
       break
     case 'page':
-      nameRequired(addPage)
+      nameRequired(addComponent, DIRECTORIES.page)
       break
     case 'rdx':
       nameRequired(addActionReducer)
-      break
-    case 'boilerplate':
-      addBoilerplate(flags)
       break
     default:
       break

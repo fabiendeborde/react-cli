@@ -7,34 +7,38 @@ const help = meow(`
   ${chalk.green.bold('Usage: re4ct [command] [--options]')}
 
   ${chalk.red('Options:')}
-      ${chalk('--name, -n  Specify the name of the component|page|action&reducer (required except for boilerplate command)')}
-      ${chalk('--folder, -f  Specify a folder to save the component|page|action&reducer (optional, does not work for boilerplate command)')}
+      ${chalk('--name, -n  Specify the name of the component|page|action&reducer (required)')}
+      ${chalk('--folder, -f  Specify a folder to save the component|page|action&reducer (optional)')}
+      ${chalk('--memo, -m Specify if the component|page should be memoized (optional)')}
+      ${chalk('--javascript, -j Specify if the files should be .js and not .ts (optional)')}
 
   ${chalk.yellow('Commands:')}
-        ${chalk.white('memo              create a new memo component')}
-        ${chalk.white('fn                create a new functional component')}
         ${chalk.white('cp                create a new functional component')}
-        ${chalk.white('pcp               create a new pure component')}
         ${chalk.white('page              create a new page')}
         ${chalk.white('rdx               add a new set of action & reducer')}
-        ${chalk.gray('boilerplate        add a new full project boilerplate code')}
   `, {
   boolean: constants.COMMAND_LIST,
   flags: {
     name: {
       type: 'string',
       alias: 'n',
-      default: ''
+      default: '',
+      isRequired: true
     },
     folder: {
       type: 'string',
       alias: 'f',
       default: ''
     },
-    style: {
-      type: 'string',
-      alias: 's',
-      default: 'styled'
+    memo: {
+      type: 'boolean',
+      alias: 'm',
+      default: false
+    },
+    javascript: {
+      type: 'boolean',
+      alias: 'j',
+      default: false
     }
   }
 })

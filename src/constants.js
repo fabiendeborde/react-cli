@@ -1,17 +1,14 @@
 exports.COMMAND_LIST = [
-  'memo',
-  'fn',
   'cp',
-  'pcp',
   'page',
-  'rdx',
-  'boilerplate'
+  'rdx'
 ]
 
 exports.DIRECTORIES = {
   component: '/src/components/',
   page: '/src/pages/',
-  cypress: '/cypress/integration/',
-  actions: '/src/actions/',
-  reducers: '/src/reducers/'
+  actions: '/src/store/actions/',
+  reducers: '/src/store/reducers/',
+  selectors: '/src/store/selectors/',
+  types: '/src/store/types/'
 }

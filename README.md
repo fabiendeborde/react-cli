@@ -20,5 +20,5 @@ Run help command to see available commands.
 
 
 ## TODOS:
-- [] add testing
-- [] add boilerplate command support
+- [ ] add testing
+- [ ] add boilerplate command support
