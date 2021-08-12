@@ -2,8 +2,12 @@ const { DIRECTORIES } = require('../../constants')
 
 module.exports = (dir) => {
   const typesPath = dir !== DIRECTORIES.actions ? '../../types' : '../types'
-  return `import {
-    SOME_TYPE
+  const rootStatePath = dir !== DIRECTORIES.actions ? '../../index' : '../index'
+  return `import { AnyAction } from 'redux'
+import { ThunkAction } from 'redux-thunk'
+import { RootState } from '${rootStatePath}'
+import {
+  SOME_TYPE
 } from '${typesPath}'
 
 export const simpleAction = (payload) => {
