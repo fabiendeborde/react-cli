@@ -8,7 +8,7 @@ const {
 } = require('../utils/createFiles')
 
 module.exports = (options, directory) => {
-  console.log('Add Component', options)
+  // console.log('Add Component', options)
   const name = capitalize(options.name)
   const { memo, javascript } = options
   let dir = `${directory}${name}`
