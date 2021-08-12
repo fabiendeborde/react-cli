@@ -7,7 +7,7 @@ const { DIRECTORIES } = require('../constants')
 
 const packageJson = require('../templates/components/packageJson')
 const reducer = require('../templates/store/reducer')
-const type = require('../templates/store/type')
+const type = require('../templates/store/types')
 const reducerIndexTemplate = require('../templates/store/reducerIndex')
 
 const createFile = async (fileName, content, path) => {
