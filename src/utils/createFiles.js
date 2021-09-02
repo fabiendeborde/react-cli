@@ -195,8 +195,9 @@ const updateTypeIndex = (name, dir, extension) => {
 }
 
 const createPackage = ({ name, dir, javascript }) => {
-  const extension = javascript ? 'jsx' : 'tsx'
-  createFile('package.json', packageJson(name, extension), dir)
+  if (javascript) {
+    createFile('package.json', packageJson(`${name}.jsx`), dir)
+  }
 }
 const createComponent = ({ name, dir, memo, javascript }) => {
   const extension = javascript ? 'jsx' : 'tsx'
